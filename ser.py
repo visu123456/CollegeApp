@@ -1,7 +1,7 @@
 # import imp
 from flask import Flask, g, render_template, request
 from update_scrapeer import give_data
-from mongodata import give_mongo_data,mycol
+from mongodata import give_mongo_data,mycol,get_time_table_data,mydb
 import html
 import time
 
@@ -40,12 +40,28 @@ def mat():
    mongo_data = give_mongo_data()
    return render_template("material.html",mat_data = mongo_data)
 
-# @app.route('/result',methods = ['POST', 'GET'])
-# def result():
-#    if request.method == 'POST':
-#       result = request.form
-#       return render_template("result.html",result = result)
+
+@app.route('/timetable')
+def display_time_table():
+   tdata = get_time_table_data()
+   return render_template("time_table.html" ,tdata = tdata)
 
 
+
+@app.route('/contects', methods=["GET", "POST"])
+def con():
+    data = {}
+    my_con  = mydb["contects"]
+    if request.method == "POST":
+        data['FirstName'] = request.form['firstname']
+        data['Lastname'] = request.form['lastname'] 
+        data['Country'] = request.form['country']
+        data['subject'] = request.form['subject']
+        my_con.insert_one(data)
+    return render_template("contact.html")
+
+@app.route('/contact')
+def contact():
+   return render_template('contact.html')
 
 app.run(debug = True)
