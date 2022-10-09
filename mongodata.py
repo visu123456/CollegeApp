@@ -9,6 +9,9 @@ mydb = myclient["material"]
 mycol = mydb["materials"]
 
 
+def take_data_from_db():
+    # print(list(mycol.myrow.find()))
+    return list(mycol.myrow.find())
 
 
 def give_mongo_data():
@@ -37,6 +40,8 @@ def get_time_table_data():
         lecture_data["4"].append(data_[day_][3])
         lecture_data["5"].append(data_[day_][4])
         lecture_data["6"].append(data_[day_][5])
+        lecture_data["5"].append(data_[day_][6])
+        lecture_data["6"].append(data_[day_][7])
 
     print(lecture_data)
     return lecture_data
