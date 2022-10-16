@@ -47,6 +47,12 @@ def display_time_table():
    return render_template("time_table.html" ,tdata = tdata)
 
 
+def added_sum_log():
+   v =[3.14]*5
+   print("logging time event ")
+   return v.sum()
+
+
 
 @app.route('/contects', methods=["GET", "POST"])
 def con():
